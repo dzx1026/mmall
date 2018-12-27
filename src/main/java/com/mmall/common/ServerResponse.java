@@ -1,10 +1,14 @@
 package com.mmall.common;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import java.io.Serializable;
 
 /**
  * 高复用的类，返回给前端序列化信息
  */
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)  //保证序列化json的时候，如果是null的对象，key也会消失
 public class ServerResponse<T> implements Serializable{
     private int status;
     private String msg;
@@ -37,6 +41,7 @@ public class ServerResponse<T> implements Serializable{
         return this.data;
     }
 
+    @JsonIgnore    //这样就不会返回boolean字段到json里面，jackson扫描public方法
     public boolean isSuccess(){
         return this.status==ResponseCode.SUCCESS.getCode();
     }
