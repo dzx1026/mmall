@@ -85,7 +85,7 @@ public class CategoryManageController {
      * @param categoryId
      * @return
      */
-    @RequestMapping(value = "get_children_category.do")
+    @RequestMapping(value = "get_deepchildren_category.do")
     @ResponseBody
     public ServerResponse getGategoryAndDeepChildrenCategory(HttpSession session,@RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId){
         User user=(User)session.getAttribute(Const.CURRENT_USER);
